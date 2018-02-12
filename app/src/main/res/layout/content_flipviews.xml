@@ -1,0 +1,402 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+	xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:paddingLeft="@dimen/activity_horizontal_margin"
+	android:paddingRight="@dimen/activity_horizontal_margin"
+	android:paddingBottom="@dimen/activity_vertical_margin"
+	tools:showIn="@layout/activity_main"
+	tools:context=".MainActivity"
+	android:orientation="vertical">
+
+
+	<FrameLayout
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:layout_marginTop="@dimen/activity_horizontal_margin"
+		android:background="@android:drawable/dialog_holo_light_frame">
+
+		<LinearLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:padding="16dp"
+			android:orientation="horizontal">
+
+			<!-- FlipView like GMail!
+				- Inner default initial animation (scale up)
+				- Default in/out animation (flip on Y axis: shrink and grow on X axis) on click
+				- Width and Height +8dp (padding x 2)
+				- Front & rear custom layout (usage of elevation attribute)
+				- Front & rear custom background color
+				  (front color is set in the onCreate of the Activity)
+				- Default rear image animation (scale up)
+				- Default rear image animation duration (150ms)
+			-->
+			<eu.davidea.flipview.FlipView
+				android:id="@+id/flip_horizontal_oval_view_big"
+				android:layout_width="@dimen/fv_normal_elevated"
+				android:layout_height="@dimen/fv_normal_elevated"
+				android:layout_marginRight="@dimen/activity_horizontal_margin"
+				android:layout_marginEnd="@dimen/activity_horizontal_margin"
+				android:layout_gravity="center_horizontal"
+				android:padding="4dp"
+				android:clipToPadding="false"
+				android:clickable="true"
+				app:checked="false"
+				app:enableInitialAnimation="true"
+				app:frontLayout="@layout/flipview_front_custom"
+				app:frontImage="@drawable/ic_add_shopping_cart_white_24dp"
+				app:rearLayout="@layout/flipview_rear_custom"
+				app:rearImageAnimationDelay="0"/>
+
+			<!-- FlipView like GMail with Text!
+				- Inner default initial animation (scale up)
+				- Default in/out animation (flip on Y axis: shrink and grow on X axis) on click
+				- Width and Height +8dp (padding x 2)
+				- Front & rear custom layout (usage of elevation attribute and a TextView)
+				- Front & rear custom background drawable
+				- Default rear image animation (scale up)
+				- Default rear image animation duration (150ms)
+			-->
+			<eu.davidea.flipview.FlipView
+				android:id="@+id/flip_horizontal_oval_textview_big"
+				android:layout_width="@dimen/fv_normal_elevated"
+				android:layout_height="@dimen/fv_normal_elevated"
+				android:layout_marginRight="@dimen/activity_horizontal_margin"
+				android:layout_marginEnd="@dimen/activity_horizontal_margin"
+				android:layout_gravity="center_horizontal"
+				android:padding="4dp"
+				android:clipToPadding="false"
+				android:clickable="true"
+				app:checked="false"
+				app:enableInitialAnimation="true"
+				app:frontLayout="@layout/flipview_front_custom_text"
+				app:frontBackground="@drawable/square_light"
+				app:rearLayout="@layout/flipview_rear_custom"
+				app:rearBackground="@drawable/square_light"
+				app:rearImageAnimation="@anim/grow_from_start_x_axis"/>
+
+			<!-- As "@+id/flip_horizontal_oval_view_big"
+				- Higher duration to see the precision of the animations.
+				- Added transparency to the rear Drawable
+			-->
+			<eu.davidea.flipview.FlipView
+				android:id="@+id/flip_horizontal_oval_view_big_precision"
+				android:layout_width="@dimen/fv_normal_elevated"
+				android:layout_height="@dimen/fv_normal_elevated"
+				android:layout_gravity="center_horizontal"
+				android:padding="4dp"
+				android:clipToPadding="false"
+				android:clickable="true"
+				app:checked="false"
+				app:enableInitialAnimation="true"
+				app:animationDuration="1000"
+				app:frontLayout="@layout/flipview_front_custom"
+				app:frontBackground="@drawable/circle_light"
+				app:frontImage="@drawable/ic_github_circle_white_24dp"
+				app:rearLayout="@layout/flipview_rear_custom"
+				app:rearBackground="@drawable/circle_light_transparent"
+				app:rearImageAnimationDuration="1000"/>
+
+		</LinearLayout>
+
+	</FrameLayout>
+
+	<!-- Animate 2 entire layouts -->
+	<eu.davidea.flipview.FlipView
+		android:id="@+id/flip_layout"
+		android:layout_width="wrap_content"
+		android:layout_height="wrap_content"
+		android:layout_gravity="center_horizontal"
+		android:outAnimation="@anim/shrink_to_middle_y_axis"
+		android:inAnimation="@anim/grow_from_middle_y_axis"
+		android:autoStart="true"
+		app:checked="false"
+		android:flipInterval="8000"
+		app:animationDuration="500"
+		app:animateDesignLayoutOnly="true">
+
+		<!-- First layout to flip -->
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:background="@android:drawable/dialog_holo_light_frame">
+
+			<View
+				android:id="@+id/triangle"
+				android:layout_width="25dp"
+				android:layout_height="50dp"
+				android:layout_gravity="top|end"
+				android:background="@drawable/triangle_green"/>
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="16dp"
+				android:orientation="horizontal">
+
+				<!--
+					- Default initial animation & animation duration (scale up)
+					- Default layout (no elevation)
+					- Custom in/out animation (scale down front layout and scale up rear layout) on click
+					- Custom In/out animation duration = 200ms
+					- Front custom background drawable
+					- Default rear image and background
+				-->
+				<eu.davidea.flipview.FlipView
+					android:id="@+id/scale_oval_view"
+					android:layout_width="@dimen/fv_mini"
+					android:layout_height="@dimen/fv_mini"
+					android:layout_marginRight="@dimen/activity_horizontal_margin"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:outAnimation="@anim/scale_down"
+					android:inAnimation="@anim/scale_up"
+					android:clickable="true"
+					app:checked="false"
+					app:enableInitialAnimation="true"
+					app:animationDuration="200"
+					app:frontBackground="@drawable/circle_light"
+					app:frontImage="@drawable/ic_account_circle_white_24dp"
+					app:rearImageAnimationDuration="200"/>
+
+				<!--
+					- Custom initial animation & animation duration (fade)
+					- Custom in/out animation (flip on X axis: shrink and grow on Y axis) on click
+					- Autostart animation with interval at 3000ms by default
+					- Default layout (no elevation)
+					- Front custom background
+					- Rear custom background volor
+					- Custom rear image padding
+					- Default rear image animation (scale up)
+					- Custom rear image animation duration (200ms)
+				-->
+				<eu.davidea.flipview.FlipView
+					android:id="@+id/fade_oval_view"
+					android:layout_width="@dimen/fv_mini"
+					android:layout_height="@dimen/fv_mini"
+					android:layout_marginRight="@dimen/activity_horizontal_margin"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:outAnimation="@anim/shrink_to_middle_y_axis"
+					android:inAnimation="@anim/grow_from_middle_y_axis"
+					android:autoStart="true"
+					android:clickable="true"
+					app:checked="false"
+					app:enableInitialAnimation="true"
+					app:initialLayoutAnimation="@anim/fade_in"
+					app:initialLayoutAnimationDuration="1000"
+					app:frontImage="@drawable/ic_cached_white_24dp"
+					app:frontBackground="@drawable/circle_light"
+					app:rearImage="@drawable/ic_cancel_white_24dp"
+					app:rearBackgroundColor="@android:color/holo_red_dark"
+					app:rearImageAnimationDuration="200"
+					app:rearImageAnimationDelay="0"/>
+
+				<!--
+					- Custom initial animation & animation duration (fade)
+					- Anticipate entry InAnimation (don't wait too much, adjust the fade effect)
+					- Custom in/out animation (fade) on click
+					- In/out animation duration increased to 200ms
+					- Default layout (no elevation)
+					- Front custom background drawable
+					- Disable rear image animation (doesn't scale up)
+				-->
+				<eu.davidea.flipview.FlipView
+					android:id="@+id/fade_oval_view2"
+					android:layout_width="@dimen/fv_mini"
+					android:layout_height="@dimen/fv_mini"
+					android:layout_marginRight="@dimen/activity_horizontal_margin"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:outAnimation="@anim/fade_out"
+					android:inAnimation="@anim/fade_in"
+					android:clickable="true"
+					app:checked="false"
+					app:enableInitialAnimation="true"
+					app:animationDuration="200"
+					app:anticipateInAnimationTime="120"
+					app:initialLayoutAnimation="@anim/fade_in"
+					app:initialLayoutAnimationDuration="1000"
+					app:frontImage="@drawable/ic_favorite_outline_white_24dp"
+					app:frontBackground="@drawable/circle_light"
+					app:rearImage="@drawable/ic_favorite_white_24dp"
+					app:animateRearImage="false"/>
+
+				<!--
+					- Not clickable!
+					- Not checked (by default), optionally you can lock the checked
+					  status by setting true
+					- Don't animate initially!
+					- Width and Height +8dp (padding x 2)
+					- Front custom layout with elevation (!!DELETED!! CAUSING APP KILLING ON API=23)
+					- Front custom background drawable with stroke
+				-->
+				<eu.davidea.flipview.FlipView
+					android:id="@+id/flip_horizontal_oval_view_locked"
+					android:layout_width="@dimen/fv_mini_elevated"
+					android:layout_height="@dimen/fv_mini_elevated"
+					android:layout_marginTop="-4dp"
+					android:padding="4dp"
+					android:clipToPadding="false"
+					android:clickable="false"
+					app:frontBackground="@drawable/circle_light_stroke"
+					app:frontImage="@drawable/ic_lock_white_24dp"/>
+
+				<android.support.v7.widget.AppCompatCheckBox
+					android:id="@+id/flag_enable"
+					android:layout_width="wrap_content"
+					android:layout_height="wrap_content"
+					android:layout_gravity="center_vertical"
+					android:checked="false"
+					android:layout_marginLeft="-4dp"
+					android:layout_marginStart="-4dp"/>
+
+			</LinearLayout>
+
+		</FrameLayout>
+
+		<!-- Second layout to flip -->
+		<FrameLayout
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_gravity="center_horizontal"
+			android:background="@android:drawable/dialog_holo_light_frame">
+
+			<LinearLayout
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:padding="16dp"
+				android:orientation="horizontal">
+
+				<!--
+					- Start checked (usage of flipSilently at startup)
+					- Inner default initial animation (scale up)
+					- Custom initial animation duration increased to 400ms
+					- Custom in/out animation (slide) on click
+					- Main animation duration increased to 500ms
+					- Anticipate entry InAnimation (don't wait too much, adjust the slide effect)
+					- Default layout (no elevation)
+					- Front & rear custom background drawable
+					- Disable rear image animation (doesn't scale up)
+				-->
+				<eu.davidea.flipview.FlipView
+					android:id="@+id/slide_left_square_view"
+					android:layout_width="@dimen/fv_mini"
+					android:layout_height="@dimen/fv_mini"
+					android:layout_marginRight="@dimen/activity_horizontal_margin"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:inAnimation="@anim/slide_in_from_left"
+					android:outAnimation="@anim/slide_out_to_right"
+					android:clickable="true"
+					app:checked="true"
+					app:enableInitialAnimation="true"
+					app:initialLayoutAnimationDuration="400"
+					app:animationDuration="500"
+					app:anticipateInAnimationTime="150"
+					app:frontBackground="@drawable/square_light"
+					app:frontImage="@drawable/ic_exit_to_app_white_24dp"
+					app:rearBackground="@drawable/square_light"
+					app:animateRearImage="false"/>
+
+				<!--
+					- Animate Design Layout Only (don't use Layout and Drawables from library)
+					  This behaviour cannot be changed at runtime.
+					  This FlipView flips the 2 ImageViews only.
+					- Inner default initial animation (scale up)
+					- Custom in/out animation (flip vertically) on click
+				-->
+				<eu.davidea.flipview.FlipView
+					android:id="@+id/flip_vertical_view_custom"
+					android:layout_width="@dimen/fv_mini"
+					android:layout_height="@dimen/fv_mini"
+					android:layout_marginRight="@dimen/activity_horizontal_margin"
+					android:layout_marginEnd="@dimen/activity_horizontal_margin"
+					android:clickable="true"
+					android:inAnimation="@anim/grow_from_middle_y_axis"
+					android:outAnimation="@anim/shrink_to_middle_y_axis"
+					app:enableInitialAnimation="true"
+					app:animateDesignLayoutOnly="true">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:contentDescription="@null"
+						android:gravity="center_horizontal"
+						android:src="@drawable/ic_action_sun"/>
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:contentDescription="@null"
+						android:gravity="center_horizontal"
+						android:src="@drawable/ic_action_sun_filled"/>
+
+				</eu.davidea.flipview.FlipView>
+
+				<!--
+					- Animate Design Layout Only (don't use Layout and Drawables from library)
+					  Render and animate only child views in Series (one after another) from
+					  this layout.
+					  This behaviour cannot be changed at runtime.
+					  This FlipView flips all ImageViews in series, background remains static.
+					- Default in/out animation (flip)
+					- Use of "android:background" attribute for a custom drawable
+				-->
+				<eu.davidea.flipview.FlipView
+					android:id="@+id/flip_horizontal_flip_child_views"
+					android:layout_width="@dimen/fv_mini"
+					android:layout_height="@dimen/fv_mini"
+					android:clickable="true"
+					app:checked="false"
+					app:enableInitialAnimation="true"
+					app:animateDesignLayoutOnly="true"
+					android:padding="4dp"
+					android:background="@drawable/square_light">
+
+					<ImageView
+						android:layout_width="wrap_content"
+						android:layout_height="wrap_content"
+						android:layout_gravity="center"
+						android:contentDescription="@null"
+						android:gravity="center_horizontal"
+						android:src="@drawable/ic_refresh_white_24dp"/>
+
+					<ImageView
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:layout_gravity="center"
+						android:contentDescription="@null"
+						android:gravity="center_horizontal"
+						android:background="@android:color/holo_red_dark"/>
+
+					<ImageView
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:layout_gravity="center"
+						android:contentDescription="@null"
+						android:gravity="center_horizontal"
+						android:background="@android:color/holo_orange_dark"/>
+
+					<ImageView
+						android:layout_width="20dp"
+						android:layout_height="20dp"
+						android:layout_gravity="center"
+						android:contentDescription="@null"
+						android:gravity="center_horizontal"
+						android:background="@android:color/holo_green_dark"/>
+
+				</eu.davidea.flipview.FlipView>
+
+			</LinearLayout>
+
+		</FrameLayout>
+
+	</eu.davidea.flipview.FlipView>
+
+</LinearLayout>
